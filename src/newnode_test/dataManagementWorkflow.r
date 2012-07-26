@@ -4,7 +4,8 @@ nodes <- newnode(name = 'aquire the raw data',
                  outputs = c('file server','metadata'), append=F)
 
 nodes <- newnode(name = 'cleaning and importing to database server', 
-                 inputs = 'file server', outputs = c('database server', 'metadata'))
+                 inputs = 'file server', 
+                 outputs = c('database server', 'metadata'))
 nodes <- addEdge(from='cleaning and importing to database server',to='metadata',graph=nodes,weights=1)
 
 nodes <- newnode(name = 'calculate new data', inputs = 'database server', 
@@ -25,7 +26,7 @@ nodes <- newnode(name = 'communicate the results', inputs ='results',
 nodes <- newnode(name = 'communicate the results', inputs ='results', 
                  outputs = 'journal publication')
 nodes <- newnode(name = 'archive at end of project', inputs ='journal publication', 
-                 outputs = 'repurposed data')
+                 outputs = c('repurposed data', 'file server'))
 nodes <- addEdge(from = 'archive at end of project', to ='file server',graph=nodes,weights=1)
 nodes <- addEdge(from = 'repurposed data', to ='database server',graph=nodes,weights=1)
 
